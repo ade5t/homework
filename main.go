@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"trainingProjectInGo/dataTransformers"
@@ -36,7 +35,9 @@ func main() {
 				for _, value := range dataForTask {
 					outputArray = append(outputArray, arrayShift.Solution(value.Data, value.Offset))
 				}
-				fmt.Println(outputArray)
+
+				var dataForRequest = dataTransformers.Collect("Циклическая ротация", dataForTask, outputArray, writer)
+				writer.Write(dataForRequest)
 			case "Проверка последовательности":
 
 				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Проверка последовательности", writer)
@@ -46,7 +47,9 @@ func main() {
 				for _, value := range dataForTask {
 					outputArray = append(outputArray, sequenceCheck.Solution(value.Data))
 				}
-				fmt.Println(outputArray)
+
+				var dataForRequest = dataTransformers.Collect("Проверка последовательности", dataForTask, outputArray, writer)
+				writer.Write(dataForRequest)
 			case "Чудные вхождения в массив":
 
 				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Чудные вхождения в массив", writer)
@@ -56,7 +59,9 @@ func main() {
 				for _, value := range dataForTask {
 					outputArray = append(outputArray, weirdEntry.Solution(value.Data))
 				}
-				fmt.Println(outputArray)
+
+				var dataForRequest = dataTransformers.Collect("Чудные вхождения в массив", dataForTask, outputArray, writer)
+				writer.Write(dataForRequest)
 			case "Поиск отсутствующего элемента":
 
 				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Поиск отсутствующего элемента", writer)
@@ -66,7 +71,9 @@ func main() {
 				for _, value := range dataForTask {
 					outputArray = append(outputArray, searchMissingElement.Solution(value.Data))
 				}
-				fmt.Println(outputArray)
+
+				var dataForRequest = dataTransformers.Collect("Поиск отсутствующего элемента", dataForTask, outputArray, writer)
+				writer.Write(dataForRequest)
 			}
 		})
 	})
