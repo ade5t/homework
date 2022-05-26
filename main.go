@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"trainingProjectInGo/dataTransformers"
-	"trainingProjectInGo/httpControllers/requests"
+	"trainingProjectInGo/httpControllers"
 	"trainingProjectInGo/taskSolvers/arrayShift"
 	"trainingProjectInGo/taskSolvers/searchMissingElement"
 	"trainingProjectInGo/taskSolvers/sequenceCheck"
@@ -20,7 +20,8 @@ func main() {
 	router.Use(middleware.Logger)
 
 	router.Get("/tasks/", func(writer http.ResponseWriter, request *http.Request) {
-
+		// TODO: Тут должно быть решение всех задач сразу, с использованием параллельного выполнения через goroutines,
+		// но сервер с генерацией исходных данных для задач и проверкой их решения на данный момент недоступен
 	})
 
 	router.Route("/task/{taskName}", func(router chi.Router) {
@@ -28,7 +29,7 @@ func main() {
 			switch chi.URLParam(request, "taskName") {
 			case "Циклическая ротация":
 
-				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Циклическая ротация", writer)
+				var rawDataForTask []byte = httpControllers.GetDataForTask("http://116.203.203.76:3000/tasks/Циклическая ротация", writer)
 				var dataForTask []types.TaskData = dataTransformers.Parse(rawDataForTask, writer)
 
 				var outputArray [][]int
@@ -37,10 +38,11 @@ func main() {
 				}
 
 				var dataForRequest = dataTransformers.Collect("Циклическая ротация", dataForTask, outputArray, writer)
-				writer.Write(dataForRequest)
+				var resultForTask []byte = httpControllers.GetResultForTask("http://116.203.203.76:3000/tasks/solution", dataForRequest, writer)
+				writer.Write(resultForTask)
 			case "Проверка последовательности":
 
-				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Проверка последовательности", writer)
+				var rawDataForTask []byte = httpControllers.GetDataForTask("http://116.203.203.76:3000/tasks/Проверка последовательности", writer)
 				var dataForTask []types.TaskData = dataTransformers.Parse(rawDataForTask, writer)
 
 				var outputArray []int
@@ -49,10 +51,11 @@ func main() {
 				}
 
 				var dataForRequest = dataTransformers.Collect("Проверка последовательности", dataForTask, outputArray, writer)
-				writer.Write(dataForRequest)
+				var resultForTask []byte = httpControllers.GetResultForTask("http://116.203.203.76:3000/tasks/solution", dataForRequest, writer)
+				writer.Write(resultForTask)
 			case "Чудные вхождения в массив":
 
-				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Чудные вхождения в массив", writer)
+				var rawDataForTask []byte = httpControllers.GetDataForTask("http://116.203.203.76:3000/tasks/Чудные вхождения в массив", writer)
 				var dataForTask []types.TaskData = dataTransformers.Parse(rawDataForTask, writer)
 
 				var outputArray []int
@@ -61,10 +64,11 @@ func main() {
 				}
 
 				var dataForRequest = dataTransformers.Collect("Чудные вхождения в массив", dataForTask, outputArray, writer)
-				writer.Write(dataForRequest)
+				var resultForTask []byte = httpControllers.GetResultForTask("http://116.203.203.76:3000/tasks/solution", dataForRequest, writer)
+				writer.Write(resultForTask)
 			case "Поиск отсутствующего элемента":
 
-				var rawDataForTask []byte = requests.GetDataForTask("http://116.203.203.76:3000/tasks/Поиск отсутствующего элемента", writer)
+				var rawDataForTask []byte = httpControllers.GetDataForTask("http://116.203.203.76:3000/tasks/Поиск отсутствующего элемента", writer)
 				var dataForTask []types.TaskData = dataTransformers.Parse(rawDataForTask, writer)
 
 				var outputArray []int
@@ -73,7 +77,8 @@ func main() {
 				}
 
 				var dataForRequest = dataTransformers.Collect("Поиск отсутствующего элемента", dataForTask, outputArray, writer)
-				writer.Write(dataForRequest)
+				var resultForTask []byte = httpControllers.GetResultForTask("http://116.203.203.76:3000/tasks/solution", dataForRequest, writer)
+				writer.Write(resultForTask)
 			}
 		})
 	})

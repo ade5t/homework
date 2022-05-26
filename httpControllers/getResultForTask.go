@@ -1,12 +1,13 @@
-package requests
+package httpControllers
 
 import (
+	"bytes"
 	"io"
 	"net/http"
 )
 
-func GetDataForTask(url string, writer http.ResponseWriter) []byte {
-	response, error := http.Get(url)
+func GetResultForTask(url string, body []byte, writer http.ResponseWriter) []byte {
+	response, error := http.Post(url, "application/json", bytes.NewBuffer(body))
 
 	if error != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
