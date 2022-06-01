@@ -8,6 +8,7 @@ import (
 
 const userName = "ade5t"
 
+// Упаковать результаты решения задачи для отправки на сервер
 func Collect(taskName string, inputTaskData []types.TaskData, taskSolution interface{}, writer http.ResponseWriter) []byte {
 	var taskResult types.TaskResult
 	var requestData types.RequestData

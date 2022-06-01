@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// Получить результаты проверки решения задачи с сервера
 func GetResultForTask(url string, body []byte, writer http.ResponseWriter) []byte {
 	response, error := http.Post(url, "application/json", bytes.NewBuffer(body))
 

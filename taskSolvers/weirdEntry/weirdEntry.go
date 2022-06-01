@@ -1,5 +1,6 @@
 package weirdEntry
 
+// Решение задачи "Чудные вхождения в массив"
 func Solution(inputArray []int) int {
 	numberWithoutPair := 0
 

@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// Получить исходные данные для задачи с сервера
 func GetDataForTask(url string, writer http.ResponseWriter) []byte {
 	response, error := http.Get(url)
 

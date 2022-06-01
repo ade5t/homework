@@ -1,5 +1,6 @@
 package arrayShift
 
+// Решение задачи "Циклическая ротация"
 func Solution(inputArray []int, offset int) []int {
 	if offset == 0 || offset == len(inputArray) {
 		return inputArray

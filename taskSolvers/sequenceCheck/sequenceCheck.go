@@ -2,6 +2,7 @@ package sequenceCheck
 
 import "sort"
 
+// Решение задачи "Проверка последовательности"
 func Solution(inputArray []int) int {
 	sort.Ints(inputArray)
 

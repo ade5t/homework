@@ -6,6 +6,7 @@ import (
 	"trainingProjectInGo/types"
 )
 
+// Распарсить исходные данные для задачи, полученные с сервера
 func Parse(responseBody []byte, writer http.ResponseWriter) []types.TaskData {
 	var bodyData [][]interface{}
 

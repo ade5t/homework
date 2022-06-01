@@ -1,5 +1,6 @@
 package searchMissingElement
 
+// Решение задачи "Поиск отсутствующего элемента"
 func Solution(inputArray []int) int {
 	sum := 0
 
